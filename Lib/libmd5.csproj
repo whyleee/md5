@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3C9D9B59-74FC-4FF3-8D6E-2C560AED7F34}</ProjectGuid>
+    <ProjectGuid>{94CA17DE-F4AE-40FA-9685-90EF59C3A714}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>libmd5</RootNamespace>
-    <AssemblyName>libmd5-rfc</AssemblyName>
+    <AssemblyName>libmd5</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

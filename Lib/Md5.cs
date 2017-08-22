@@ -85,15 +85,48 @@ namespace libmd5
         private uint t;
         private uint[] X = new uint[16];
 
+        private Md5State _state;
+
+        public Md5()
+        {
+            _state = new Md5State();
+            Init(_state);
+        }
+
+        /// <summary>
+        /// Generates the hash directy from the buffer
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <returns></returns>
         public byte[] ComputeHash(byte[] buffer)
         {
-            var state = new Md5State();
+            Append(_state, buffer, buffer.Length);
+            return Generate();
+        }
 
-            Init(state);
-            Append(state, buffer, buffer.Length);
-            var digest = Finish(state);
+        /// <summary>
+        /// Appends data which should be used for computing the hash
+        /// </summary>
+        /// <param name="buffer"></param>
+        public void Append(byte[] buffer)
+        {
+            Append(_state, buffer, buffer.Length);
+        }
 
+        /// <summary>
+        /// Generates the hash and retuns itas byte []
+        /// </summary>
+        /// <returns></returns>
+        public byte[] Generate()
+        {
+            var digest = Finish(_state);
             return digest;
+        }
+
+        public string GenerateHashString()
+        {
+            var bytes = Generate();
+            return BitConverter.ToString(bytes).Replace("-", "").ToLower();
         }
 
         private void Process(Md5State pms, byte[] data /*[64]*/)

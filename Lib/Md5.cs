@@ -1,4 +1,5 @@
-﻿using System;
+﻿// C# port of md5.c https://sourceforge.net/projects/libmd5-rfc/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -98,10 +99,12 @@ namespace libmd5
         /// </summary>
         /// <param name="buffer"></param>
         /// <returns></returns>
-        public byte[] ComputeHash(byte[] buffer)
+        public static byte[] ComputeHash(byte[] buffer)
         {
-            Append(_state, buffer, buffer.Length);
-            return Generate();
+            var md5 = new Md5();
+            md5.Append(buffer);
+
+            return md5.Generate();
         }
 
         /// <summary>
@@ -121,12 +124,6 @@ namespace libmd5
         {
             var digest = Finish(_state);
             return digest;
-        }
-
-        public string GenerateHashString()
-        {
-            var bytes = Generate();
-            return BitConverter.ToString(bytes).Replace("-", "").ToLower();
         }
 
         private void Process(Md5State pms, byte[] data /*[64]*/)

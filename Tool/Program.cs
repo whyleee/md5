@@ -1,8 +1,8 @@
-﻿using System;
+﻿// C# port of md5main.c https://sourceforge.net/projects/libmd5-rfc/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using libmd5;
 namespace Tool
 {
     class Program
@@ -54,13 +54,12 @@ namespace Tool
 
         private static int Test()
         {
-            var md5 = new Md5();
             var status = 0;
 
             foreach (var testCase in testCases)
             {
                 var inputBytes = Encoding.ASCII.GetBytes(testCase.Input);
-                var hashBytes = md5.ComputeHash(inputBytes);
+                var hashBytes = libmd5.Md5.ComputeHash(inputBytes);
                 var hash = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
 
                 if (hash != testCase.Hash)
